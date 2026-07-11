@@ -1,12 +1,12 @@
+import { Message } from "@/types/message";
 export class ChatWebSocket {
 
     private socket: WebSocket | null = null;
 
     connect(
     conversationId: string,
-    onMessage: (data: any) => void
+    onMessage: (data: Message) => void
 ) {
-
     const wsBase =
         process.env.NEXT_PUBLIC_WS_URL ??
         "ws://127.0.0.1:8000";
@@ -20,7 +20,8 @@ export class ChatWebSocket {
     };
 
     this.socket.onmessage = (event) => {
-        onMessage(JSON.parse(event.data));
+        const message: Message = JSON.parse(event.data);
+        onMessage(message);
     };
 
     this.socket.onclose = () => {

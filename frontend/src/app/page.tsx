@@ -11,6 +11,11 @@ import { ChatWebSocket } from "@/lib/websocket";
 import { Conversation } from "@/types/conversation";
 import { Message } from "@/types/message";
 
+type DemoUser = {
+    id: string;
+    name: string;
+};
+
 const USERS = {
     kaelen: {
         id: "52445db9-3755-4dae-9d1d-899ffcba9b89",
@@ -28,7 +33,8 @@ export default function Home() {
     const socket = useRef<ChatWebSocket | null>(null);
 
     // Read user from URL
-    const [currentUser, setCurrentUser] = useState(USERS.kaelen);
+    const [currentUser, setCurrentUser] =
+    useState<DemoUser>(USERS.kaelen);;
 
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [selectedConversation, setSelectedConversation] =
