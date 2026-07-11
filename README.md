@@ -174,13 +174,13 @@ http://localhost:3000
 
 ## Person 1 POV
 
-![Chat Window](assets/kaelen.png)
+![Chat Window](assets/kaelen-pov.png)
 
 ---
 
 ## Person 2 POV
 
-![Chat Window](assets/lyra.png)
+![Chat Window](assets/lyra-pov.png)
 
 ---
 
