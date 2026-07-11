@@ -166,7 +166,21 @@ http://localhost:3000
 
 # 📷 Screenshots
 
-*(Screenshots can be added here if desired.)*
+## Groups
+
+![Landing Page](assets/group.png)
+
+---
+
+## Person 1 POV
+
+![Chat Window](assets/kaelen.png)
+
+---
+
+## Person 2 POV
+
+![Chat Window](assets/lyra.png)
 
 ---
 
