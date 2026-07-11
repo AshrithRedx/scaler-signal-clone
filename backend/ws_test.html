@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Test</title>
+</head>
+
+<body>
+
+<h2>WebSocket Test</h2>
+
+<input
+    id="conversation"
+    placeholder="Conversation UUID"
+    style="width:500px;"
+>
+
+<br><br>
+
+<input
+    id="sender"
+    placeholder="Sender UUID"
+    style="width:500px;"
+>
+
+<br><br>
+
+<input
+    id="msg"
+    placeholder="Message"
+    style="width:500px;"
+>
+
+<br><br>
+
+<button onclick="connect()">
+Connect
+</button>
+
+<button onclick="send()">
+Send
+</button>
+
+<pre
+id="output"
+style="border:1px solid black;padding:10px;height:300px;overflow:auto;"
+></pre>
+
+<script>
+
+let ws;
+
+function connect(){
+
+    const conversationId =
+        document.getElementById("conversation").value;
+
+    ws = new WebSocket(
+        `ws://127.0.0.1:8000/ws/${conversationId}`
+    );
+
+    ws.onopen = ()=>{
+
+        output.textContent +=
+        "Connected\n";
+
+    }
+
+    ws.onmessage = (event)=>{
+
+        output.textContent +=
+        event.data + "\n";
+
+    }
+
+    ws.onerror = (err)=>{
+
+        console.log(err);
+
+    }
+
+    ws.onclose = ()=>{
+
+        output.textContent +=
+        "Disconnected\n";
+
+    }
+
+}
+
+function send(){
+
+    ws.send(JSON.stringify({
+
+        sender_id:
+            document.getElementById("sender").value,
+
+        content:
+            document.getElementById("msg").value
+
+    }));
+
+}
+
+</script>
+
+</body>
+
+</html>
