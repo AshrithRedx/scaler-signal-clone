@@ -3,31 +3,34 @@ export class ChatWebSocket {
     private socket: WebSocket | null = null;
 
     connect(
-        conversationId: string,
-        onMessage: (data: any) => void
-    ) {
+    conversationId: string,
+    onMessage: (data: any) => void
+) {
 
-        this.socket = new WebSocket(
-            `ws://127.0.0.1:8000/ws/${conversationId}`
-        );
+    const wsBase =
+        process.env.NEXT_PUBLIC_WS_URL ??
+        "ws://127.0.0.1:8000";
 
-        this.socket.onopen = () => {
-            console.log("✅ WebSocket Connected");
-        };
+    this.socket = new WebSocket(
+        `${wsBase}/ws/${conversationId}`
+    );
 
-        this.socket.onmessage = (event) => {
-            onMessage(JSON.parse(event.data));
-        };
+    this.socket.onopen = () => {
+        console.log("✅ WebSocket Connected");
+    };
 
-        this.socket.onclose = () => {
-            console.log("❌ WebSocket Disconnected");
-        };
+    this.socket.onmessage = (event) => {
+        onMessage(JSON.parse(event.data));
+    };
 
-        this.socket.onerror = (error) => {
-            console.error("WebSocket Error:", error);
-        };
+    this.socket.onclose = () => {
+        console.log("❌ WebSocket Disconnected");
+    };
 
-    }
+    this.socket.onerror = (error) => {
+        console.error("WebSocket Error:", error);
+    };
+}
 
     send(senderId: string, content: string) {
 
